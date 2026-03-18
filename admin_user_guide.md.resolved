@@ -1,0 +1,371 @@
+# Grace Logistics — Admin Panel User Guide
+
+> **Version:** 1.0 · **Last Updated:** March 11, 2026
+
+---
+
+## Table of Contents
+
+1. [Logging In](#1-logging-in)
+2. [Dashboard Overview](#2-dashboard-overview)
+3. [Rate Management](#3-rate-management)
+4. [User Management](#4-user-management)
+5. [Port Management](#5-port-management)
+6. [Container Types](#6-container-types)
+7. [Commodity Types](#7-commodity-types)
+8. [Pricing Tiers](#8-pricing-tiers)
+9. [Audit Log](#9-audit-log)
+10. [Settings](#10-settings)
+11. [Booking Email Notifications](#11-booking-email-notifications)
+
+---
+
+## 1. Logging In
+
+Navigate to the admin panel URL and sign in with your administrator credentials.
+
+![Admin Login Screen](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/admin_login_screen_1773191011354.png)
+
+| Field | Description |
+|-------|-------------|
+| **Email** | Your admin email address |
+| **Password** | Your admin password |
+
+- Click **Sign In** to access the dashboard
+- Click **← Back to Website** to return to the public site
+
+> [!IMPORTANT]
+> Only users with the [admin](file:///Users/yujithperera/Documents/Gracelogistics_V5/admin) role can access the admin panel. Regular customers will be denied access.
+
+---
+
+## 2. Dashboard Overview
+
+The landing page after login. Shows a high-level summary of your platform data at a glance.
+
+![Dashboard Overview](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_overview_1773191169372.png)
+
+### Summary Cards
+
+| Card | Description |
+|------|-------------|
+| **Total Rates** | Total number of freight rate entries in the system |
+| **Active Rates** | Number of rates currently marked as active |
+| **Customers** | Number of registered customer accounts |
+| **Ports** | Total ports available in the system |
+
+### Sidebar Navigation
+
+The left sidebar provides quick access to all admin sections. The currently logged-in user's email and a **Log Out** button are shown at the bottom of the sidebar.
+
+---
+
+## 3. Rate Management
+
+The core section for managing freight rate quotes that customers see on the public rates page.
+
+![Rate Management](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_rates_1773191173338.png)
+
+### Filters
+
+Use the dropdown filters at the top to narrow down displayed rates:
+
+| Filter | Options |
+|--------|---------|
+| **Origin** | Filter by port of loading |
+| **Destination** | Filter by port of discharge |
+| **Tier** | Filter by pricing tier (Public, Tier 1, etc.) |
+| **Status** | Filter by Active or Inactive |
+
+Click **Clear** to reset all filters.
+
+### Rate Table Columns
+
+| Column | Description |
+|--------|-------------|
+| **Origin** | Port of loading (city + country) |
+| **Destination** | Port of discharge (city + country) |
+| **Container** | Container type (e.g., 20' Dry Standard) |
+| **Tier** | Pricing tier this rate belongs to (Public = visible to all) |
+| **Rate (USD)** | Price per container in US Dollars |
+| **Transit** | Transit time in days (optional) |
+| **Valid From** | Start date of rate validity |
+| **Valid To** | End date of rate validity |
+| **Status** | Active (green) or Inactive |
+
+### Actions
+
+| Button | Description |
+|--------|-------------|
+| **+ New Rate** | Opens a form to create a new freight rate |
+| **Download CSV** | Exports all rates as a CSV file |
+| **Edit** | Modify an existing rate's details |
+| **Dup** | Duplicate a rate (useful for creating similar rates) |
+| **Del** | Delete a rate (with confirmation) |
+
+### Creating a New Rate
+
+1. Click **+ New Rate** in the top-right corner
+2. Fill in the required fields:
+   - **Origin Port** and **Destination Port** (select from dropdowns)
+   - **Container Type** (select from configured types)
+   - **Rate (USD)** — the price per container
+   - **Pricing Tier** — which customer tier can see this rate
+   - **Valid From / Valid To** dates
+   - **Transit Days** (optional)
+3. Click **Save** to publish the rate
+
+> [!TIP]
+> Use the **Dup** (duplicate) button to quickly create a variant of an existing rate — for example, the same route with a different container type or tier.
+
+---
+
+## 4. User Management
+
+Manage all customer accounts, including their roles, companies, pricing tiers, and approval status.
+
+![User Management](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_users_1773191177170.png)
+
+### User Table Columns
+
+| Column | Description |
+|--------|-------------|
+| **Name** | Customer's full name |
+| **Email** | Account email address |
+| **Company** | Company/organization name |
+| **Role** | `customer` or [admin](file:///Users/yujithperera/Documents/Gracelogistics_V5/admin) |
+| **Pricing Tier** | Which pricing tier this user belongs to |
+| **Status** | Active (green) or Inactive |
+| **Created** | Account creation date |
+
+### Actions
+
+| Button | Description |
+|--------|-------------|
+| **+ New User** | Create a new customer account |
+| **Edit** | Modify user details, change tier, or deactivate |
+
+### Editing a User
+
+Click the **Edit** button next to any user to modify:
+- **Name**, **Company** — update profile information
+- **Pricing Tier** — switch between Public, Tier 1, etc. to control which rates they see
+- **Status** — set to Active or Inactive to enable/disable account access
+- **Role** — change between `customer` and [admin](file:///Users/yujithperera/Documents/Gracelogistics_V5/admin)
+
+> [!IMPORTANT]
+> Changing a user's **Pricing Tier** immediately affects which rates they see on the public rates page. Customers on "Public" tier only see public rates. Customers on "Tier 1" see Tier 1 rates (typically better pricing).
+
+---
+
+## 5. Port Management
+
+Manage the ports available for origin/destination selection in rate entries and the public search form.
+
+![Port Management](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_ports_1773191180962.png)
+
+### Port Table Columns
+
+| Column | Description |
+|--------|-------------|
+| **Name** | Port city name (e.g., Shanghai, Colombo) |
+| **Country** | Country the port belongs to |
+| **Port Code** | International port code (e.g., CNSHA, LKCMB) |
+| **Created** | Date the port was added |
+
+### Actions
+
+| Button | Description |
+|--------|-------------|
+| **+ New Port** | Add a new port to the system |
+| **Edit** | Modify port name, country, or code |
+| **Del** | Remove a port (only if not used in any rates) |
+
+### Adding a New Port
+
+1. Click **+ New Port**
+2. Enter the **Port Name**, **Country**, and **Port Code**
+3. Click **Save**
+
+> [!NOTE]
+> Port codes follow the UN/LOCODE format (e.g., CNSHA for Shanghai, China). You can look up codes at [unece.org](https://unece.org/trade/cefact/UNLOCODE-Download).
+
+---
+
+## 6. Container Types
+
+Configure the container types available for rate entries (e.g., 20' Dry Standard, 40' High Cube).
+
+![Container Types](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_container_types_1773191206061.png)
+
+### Managing Container Types
+
+- Click **+ New Type** to add a container type
+- Each type has a **Name** (displayed to customers) and a **Code** (internal identifier)
+- Use **Edit** to rename or update a container type
+- Use **Del** to remove (only if not referenced by existing rates)
+
+### Common Container Types
+
+| Container | Typical Use |
+|-----------|-------------|
+| 20' Dry Standard | General cargo, most common |
+| 40' Dry Standard | Larger general cargo shipments |
+| 40' Dry High Cube | Bulky/light cargo needing extra height |
+| 20' Reefer | Temperature-controlled (perishables) |
+| 40' Reefer High Cube | Large temperature-controlled shipments |
+
+---
+
+## 7. Commodity Types
+
+Manage the commodity categories customers can select when searching for rates (optional field).
+
+![Commodity Types](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_commodity_types_1773191209855.png)
+
+### Managing Commodity Types
+
+- Click **+ New Type** to add a commodity category
+- Each commodity has a **Name** (e.g., "General Cargo", "Garments", "Electronics")
+- Use **Edit** / **Del** buttons to manage existing types
+- These appear as dropdown options on the public rates search form
+
+---
+
+## 8. Pricing Tiers
+
+Configure the pricing tier system that controls rate visibility per customer.
+
+![Pricing Tiers](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_pricing_tiers_1773191213698.png)
+
+### How Tiers Work
+
+```
+Public rates → Visible to everyone (even non-logged-in visitors)
+Tier 1 rates → Only visible to customers assigned to Tier 1
+Tier 2 rates → Only visible to customers assigned to Tier 2
+...and so on
+```
+
+### Managing Tiers
+
+- Click **+ New Tier** to create a pricing tier
+- Each tier has a **Name** (e.g., "Tier 1", "VIP", "Preferred")
+- Assign customers to tiers via [User Management](#4-user-management)
+- Create rate entries with specific tier visibility via [Rate Management](#3-rate-management)
+
+> [!TIP]
+> Use pricing tiers to offer competitive rates to key accounts while keeping standard public pricing visible to new visitors. A customer on "Tier 1" sees both public rates AND their exclusive Tier 1 rates.
+
+---
+
+## 9. Audit Log
+
+A complete, read-only log of every change made in the admin panel. Useful for tracking who changed what and when.
+
+![Audit Log](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_audit_log_1773191254138.png)
+
+### Audit Log Columns
+
+| Column | Description |
+|--------|-------------|
+| **Timestamp** | Exact date and time of the change |
+| **Table** | Which data was changed (Rates, Profiles, etc.) |
+| **Action** | Type of change — INSERT, UPDATE, or DELETE |
+| **Record ID** | Unique identifier of the affected record |
+| **Performed By** | Email of the admin who made the change |
+
+### Viewing Details
+
+Click the **View** button on any row to see a detailed, formatted modal showing:
+
+- **What was changed** — field-by-field breakdown
+- **Old vs. New values** — for UPDATE actions, changed fields are highlighted in amber
+- **Full record data** — for INSERT and DELETE actions
+
+> [!NOTE]
+> The audit log is read-only and cannot be modified or deleted. It provides a complete accountability trail for all administrative actions.
+
+---
+
+## 10. Settings
+
+Configure system-wide platform settings.
+
+![Platform Settings](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_settings_1773191257949.png)
+
+### Bill of Lading (B/L) Fee
+
+| Field | Description |
+|-------|-------------|
+| **Amount (USD)** | The B/L fee added to every booking request's grand total |
+
+- Enter the fee amount in USD
+- Click **Save B/L Fee** to update
+- This fee is shown on the public rates page as a separate line item
+
+### Booking Contact Emails
+
+| Field | Description |
+|-------|-------------|
+| **Email Addresses** | List of email addresses that receive booking request notifications |
+
+- Enter one email address per line
+- Click **Save Emails** to update
+- When a customer submits a booking request, all listed email addresses receive the notification
+- Employee emails are **never exposed** to customers
+
+> [!IMPORTANT]
+> Make sure at least one valid email address is configured here. If no emails are set, booking notifications will fall back to the default address.
+
+---
+
+## 11. Booking Email Notifications
+
+When a customer submits a booking request through the rates page, the system:
+
+1. **Sends a branded HTML email** to all addresses configured in Settings → Booking Contact Emails
+2. **Does NOT expose** any employee email addresses to the customer
+3. The email includes:
+   - Route details (origin → destination)
+   - Shipment details (container type, quantity, rates)
+   - Customer contact information
+   - A **"Reply to Customer"** button for easy response
+4. Each email has a **unique reference ID** in the subject line (e.g., `[GL-20260311-1430]`) for easy tracking
+
+### What the Customer Sees
+
+When they click "Send Booking Request":
+- A loading spinner appears on the button
+- On success: a green confirmation message — *"Booking request sent! We'll get back to you within 24 hours."*
+- The modal closes automatically after 3 seconds
+- On failure: an error message appears with details
+
+---
+
+## Quick Reference
+
+### Workflow: Adding a New Rate
+
+1. **Ports** → Ensure both origin and destination ports exist
+2. **Container Types** → Ensure the container type exists
+3. **Pricing Tiers** → Ensure the target tier exists
+4. **Rates** → Click **+ New Rate**, fill in details, save
+
+### Workflow: Onboarding a New Customer with Preferred Pricing
+
+1. **Pricing Tiers** → Create a tier if needed (e.g., "Preferred")
+2. **Users** → Find the customer → **Edit** → Set their tier to "Preferred"
+3. **Rates** → Create rates with tier = "Preferred" for their specific routes
+4. Customer now sees their exclusive rates when logged in
+
+### Workflow: Investigating a Change
+
+1. **Audit Log** → Filter or scroll to find the timestamp
+2. Click **View** to see the full change details
+3. Check **Performed By** to identify who made the change
+4. Review **Old vs. New values** for UPDATE actions
+
+---
+
+> **Need help?** Contact your system administrator or development team for technical support.

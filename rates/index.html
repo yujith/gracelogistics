@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Search freight rates by trade lane and container type. Get instant quotes from Grace Logistics for ocean freight shipping from Sri Lanka and worldwide.">
+    <title>Search Freight Rates | Grace Logistics</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="rates.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../images/image.png" alt="Grace Logistics Logo" class="logo-image">
+                </a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../about.html" class="nav-link">About</a></li>
+                    <li><a href="../portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="index.html" class="nav-link active">Rates</a></li>
+                    <li><a href="../contact.html" class="nav-link btn-primary">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header page-header-rates">
+        <div class="page-header-bg"></div>
+        <div class="container">
+            <h1 class="page-title">Search Freight Rates</h1>
+            <p class="page-subtitle">Get instant freight rate quotes for your shipments worldwide</p>
+        </div>
+    </section>
+
+    <!-- Auth Bar -->
+    <div class="auth-bar" id="authBar">
+        <div class="container">
+            <div class="auth-bar-content">
+                <div class="auth-bar-info" id="authInfo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>You're viewing <strong>public rates</strong>. Log in for exclusive pricing.</span>
+                </div>
+                <div class="auth-bar-actions" id="authActions">
+                    <button class="btn-auth btn-login" id="btnShowLogin">Log In</button>
+                    <button class="btn-auth btn-signup" id="btnShowSignup">Sign Up</button>
+                </div>
+                <!-- Shown when logged in -->
+                <div class="auth-bar-user" id="authUser" style="display: none;">
+                    <div class="user-badge" id="userBadge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span id="userEmail"></span>
+                        <span class="tier-tag" id="userTier"></span>
+                    </div>
+                    <button class="btn-auth btn-logout" id="btnLogout">Log Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rate Search Section -->
+    <section class="rate-search-section">
+        <div class="container">
+            <div class="search-card">
+                <div class="search-card-header">
+                    <div class="search-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>Get Your Rate</h2>
+                        <p>Enter your shipment details below</p>
+                    </div>
+                </div>
+
+                <form id="rateSearchForm" class="search-form" novalidate>
+                    <div class="form-grid">
+                        <!-- Port of Loading -->
+                        <div class="form-group" id="originGroup">
+                            <label for="originPort">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="m8 12 4 4 4-4"></path>
+                                    <path d="M12 8v8"></path>
+                                </svg>
+                                Port of Loading <span class="required">*</span>
+                            </label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="originPort" placeholder="Search port..."
+                                    autocomplete="new-password" name="search_origin_port" role="combobox"
+                                    aria-autocomplete="list" required>
+                                <input type="hidden" id="originPortId">
+                                <div class="autocomplete-dropdown" id="originDropdown"></div>
+                            </div>
+                            <span class="form-error" id="originError">Please select a port of loading</span>
+                        </div>
+
+                        <!-- Port of Discharge -->
+                        <div class="form-group" id="destGroup">
+                            <label for="destPort">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="m16 12-4-4-4 4"></path>
+                                    <path d="M12 16V8"></path>
+                                </svg>
+                                Port of Discharge <span class="required">*</span>
+                            </label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="destPort" placeholder="Search port..."
+                                    autocomplete="new-password" name="search_dest_port" role="combobox"
+                                    aria-autocomplete="list" required>
+                                <input type="hidden" id="destPortId">
+                                <div class="autocomplete-dropdown" id="destDropdown"></div>
+                            </div>
+                            <span class="form-error" id="destError">Please select a port of discharge</span>
+                        </div>
+
+                        <!-- Container Type -->
+                        <div class="form-group" id="containerGroup">
+                            <label for="containerType">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                </svg>
+                                Container Type <span class="required">*</span>
+                            </label>
+                            <select id="containerType" required>
+                                <option value="">Select container type</option>
+                                <!-- Populated dynamically from DB -->
+                            </select>
+                            <span class="form-error" id="containerError">Please select a container type</span>
+                        </div>
+
+                        <!-- Number of Containers -->
+                        <div class="form-group">
+                            <label for="containerQty">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                </svg>
+                                Number of Containers <span class="required">*</span>
+                            </label>
+                            <div class="qty-input">
+                                <button type="button" class="qty-btn qty-minus" id="qtyMinus">−</button>
+                                <input type="number" id="containerQty" value="1" min="1" max="999" required>
+                                <button type="button" class="qty-btn qty-plus" id="qtyPlus">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Cargo Weight -->
+                        <div class="form-group">
+                            <label for="cargoWeight">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                                </svg>
+                                Cargo Weight / Container
+                                <span class="optional-tag">Optional</span>
+                            </label>
+                            <div class="weight-input">
+                                <input type="number" id="cargoWeight" placeholder="e.g. 18000" min="0" step="100">
+                                <span class="weight-unit">kg</span>
+                            </div>
+                        </div>
+
+                        <!-- Commodity Type -->
+                        <div class="form-group">
+                            <label for="commodityType">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path>
+                                    <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path>
+                                    <path d="M18 12a2 2 0 0 0 0 4h4v-4z"></path>
+                                </svg>
+                                Commodity Type
+                                <span class="optional-tag">Optional</span>
+                            </label>
+                            <select id="commodityType">
+                                <option value="">Select commodity type</option>
+                                <!-- Populated dynamically from DB -->
+                            </select>
+                        </div>
+
+                        <!-- Ready Date -->
+                        <div class="form-group">
+                            <label for="readyDate">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                Cargo Ready Date
+                                <span class="optional-tag">Optional</span>
+                            </label>
+                            <input type="date" id="readyDate">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-search" id="btnSearch">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Search Rates
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <section class="rate-results-section" id="resultsSection" style="display: none;">
+        <div class="container">
+            <!-- Loading State -->
+            <div class="results-loading" id="resultsLoading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Searching best rates...</p>
+            </div>
+
+            <!-- Results Found -->
+            <div class="results-content" id="resultsContent" style="display: none;">
+                <div class="results-header">
+                    <h2 id="resultsTitle">Rate Results</h2>
+                    <p id="resultsSubtitle"></p>
+                </div>
+
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Rate cards will be injected here -->
+                </div>
+
+                <div class="results-disclaimer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <p>Rates shown are indicative and subject to availability at the time of booking. Additional
+                        surcharges may apply. Contact us for a final quotation.</p>
+                </div>
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="8" y1="8" x2="14" y2="14"></line>
+                        <line x1="14" y1="8" x2="8" y2="14"></line>
+                    </svg>
+                </div>
+                <h3>No Rates Available</h3>
+                <p>We don't have a published rate for this trade lane right now.</p>
+                <p>Please contact our team for a custom quote.</p>
+                <div class="no-results-actions">
+                    <a href="mailto:niroshan.s@gracelogisticslk.com?subject=Custom%20Rate%20Request"
+                        class="btn btn-cta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Email Customer Service
+                    </a>
+                    <a href="tel:+94112285232" class="btn btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                            </path>
+                        </svg>
+                        Call +94 11 228 5232
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-card">
+            <button class="modal-close" id="modalClose">×</button>
+
+            <!-- Login Form -->
+            <div class="modal-content" id="loginForm">
+                <div class="modal-header">
+                    <h2>Welcome Back</h2>
+                    <p>Log in to access your exclusive freight rates</p>
+                </div>
+                <form id="loginFormEl" novalidate>
+                    <div class="modal-form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <div class="modal-error" id="loginError"></div>
+                    <button type="submit" class="btn btn-modal-submit" id="btnLogin">
+                        <span class="btn-text">Log In</span>
+                        <span class="btn-loading" style="display:none;">
+                            <span class="spinner-small"></span> Logging in...
+                        </span>
+                    </button>
+                </form>
+                <div class="modal-footer">
+                    <p><button class="link-btn" id="switchToForgot">Forgot your password?</button></p>
+                    <p>Don't have an account? <button class="link-btn" id="switchToSignup">Sign Up</button></p>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="modal-content" id="signupForm" style="display: none;">
+                <div class="modal-header">
+                    <h2>Create Account</h2>
+                    <p>Sign up to access exclusive rates and manage your shipments</p>
+                </div>
+                <form id="signupFormEl" novalidate>
+                    <div class="modal-form-row" style="display:flex;gap:12px;">
+                        <div class="modal-form-group" style="flex:1;">
+                            <label for="signupFirstName">First Name</label>
+                            <input type="text" id="signupFirstName" placeholder="John">
+                        </div>
+                        <div class="modal-form-group" style="flex:1;">
+                            <label for="signupLastName">Last Name</label>
+                            <input type="text" id="signupLastName" placeholder="Doe">
+                        </div>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Min. 6 characters" required
+                            minlength="6">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="signupPasswordConfirm">Confirm Password</label>
+                        <input type="password" id="signupPasswordConfirm" placeholder="Re-enter password" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="signupCompany">Company / Organization <span
+                                style="font-weight:400;color:#94a3b8;font-size:0.8em;">(Optional)</span></label>
+                        <input type="text" id="signupCompany" placeholder="e.g. Acme Trading Co.">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="signupBusinessReg">Business Registration # <span
+                                style="font-weight:400;color:#94a3b8;font-size:0.8em;">(Optional)</span></label>
+                        <input type="text" id="signupBusinessReg" placeholder="e.g. BRN12345678">
+                    </div>
+                    <div class="modal-error" id="signupError"></div>
+                    <button type="submit" class="btn btn-modal-submit" id="btnSignup">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loading" style="display:none;">
+                            <span class="spinner-small"></span> Creating...
+                        </span>
+                    </button>
+                </form>
+                <div class="modal-footer">
+                    <p>Already have an account? <button class="link-btn" id="switchToLogin">Log In</button></p>
+                </div>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div class="modal-content" id="forgotForm" style="display: none;">
+                <div class="modal-header">
+                    <h2>Reset Password</h2>
+                    <p>Enter your email and we'll send you a link to reset your password</p>
+                </div>
+                <form id="forgotFormEl" novalidate>
+                    <div class="modal-form-group">
+                        <label for="forgotEmail">Email Address</label>
+                        <input type="email" id="forgotEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="modal-error" id="forgotError"></div>
+                    <div class="modal-success" id="forgotSuccess" style="display:none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>Check your email! We've sent a password reset link.</span>
+                    </div>
+                    <button type="submit" class="btn btn-modal-submit" id="btnForgot">
+                        <span class="btn-text">Send Reset Link</span>
+                        <span class="btn-loading" style="display:none;">
+                            <span class="spinner-small"></span> Sending...
+                        </span>
+                    </button>
+                </form>
+                <div class="modal-footer">
+                    <p>Remember your password? <button class="link-btn" id="forgotToLogin">Back to Login</button></p>
+                </div>
+            </div>
+
+            <!-- Reset Password Form (shown after clicking email link) -->
+            <div class="modal-content" id="resetPasswordForm" style="display: none;">
+                <div class="modal-header">
+                    <h2>Set New Password</h2>
+                    <p>Choose a new password for your account</p>
+                </div>
+                <form id="resetPasswordFormEl" novalidate>
+                    <div class="modal-form-group">
+                        <label for="resetNewPassword">New Password</label>
+                        <input type="password" id="resetNewPassword" placeholder="Min. 6 characters" required
+                            minlength="6">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="resetConfirmPassword">Confirm New Password</label>
+                        <input type="password" id="resetConfirmPassword" placeholder="Re-enter password" required>
+                    </div>
+                    <div class="modal-error" id="resetError"></div>
+                    <button type="submit" class="btn btn-modal-submit" id="btnResetPassword">
+                        <span class="btn-text">Update Password</span>
+                        <span class="btn-loading" style="display:none;">
+                            <span class="spinner-small"></span> Updating...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Request Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-card">
+            <button class="modal-close" id="bookingModalClose">×</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Request Booking</h2>
+                    <p>We'll get back to you within 24 hours</p>
+                </div>
+                <form id="bookingFormEl">
+                    <div class="booking-summary" id="bookingSummary"></div>
+                    <div class="modal-form-group">
+                        <label for="bookingName">Your Name <span class="required">*</span></label>
+                        <input type="text" id="bookingName" placeholder="Full Name" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="bookingEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="bookingEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="bookingPhone">Phone Number</label>
+                        <input type="tel" id="bookingPhone" placeholder="+94 xxx xxx xxxx">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="bookingNotes">Additional Notes</label>
+                        <textarea id="bookingNotes" rows="3" placeholder="Any special requirements..."></textarea>
+                    </div>
+                    <div class="modal-error" id="bookingError"></div>
+                    <button type="submit" class="btn btn-modal-submit" id="btnBookingSubmit">
+                        <span class="btn-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            Send Booking Request
+                        </span>
+                        <span class="btn-loading" style="display:none;">
+                            <span class="spinner-small"></span> Sending...
+                        </span>
+                    </button>
+                    <div class="booking-success" id="bookingSuccess" style="display:none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>Booking request sent! We'll get back to you within 24 hours.</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Grace Logistics</h3>
+                    <p class="footer-description">Your trusted partner in global logistics, delivering ethical,
+                        efficient, and customer-focused supply chain solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../portfolio.html">Portfolio</a></li>
+                        <li><a href="index.html">Search Rates</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Address</h4>
+                    <p>No.04, Geethanjalee Road, RezG Hub Building, 4th Floor<br>Colombo 03, Sri Lanka</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contacts</h4>
+                    <p>+94 11 228 5232</p>
+                    <p><a href="mailto:niroshan.s@gracelogisticslk.com">niroshan.s@gracelogisticslk.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Grace Logistics. All rights reserved.</p>
+                <p class="powered-by">Powered by <a href="https://mustardlabs.org" target="_blank"
+                        rel="noopener">Mustard Labs</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/main.js"></script>
+    <script src="rates.js"></script>
+</body>
+
+</html>

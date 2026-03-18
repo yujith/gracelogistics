@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard | Grace Logistics</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-logo">
+                    <img src="../images/image.png" alt="Grace Logistics" class="login-logo-img">
+                </div>
+                <h1>Admin Dashboard</h1>
+                <p class="login-subtitle">Enter your credentials to continue</p>
+                <form id="adminLoginForm">
+                    <div class="login-field">
+                        <label for="adminEmail">Email</label>
+                        <input type="email" id="adminEmail" placeholder="admin@gracelogisticslk.com" required>
+                    </div>
+                    <div class="login-field">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" placeholder="Enter password" required>
+                    </div>
+                    <div class="login-error" id="loginError"></div>
+                    <button type="submit" class="btn-login-submit" id="btnAdminLogin">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-loading" style="display:none;"><span class="spinner-sm"></span> Signing
+                            in...</span>
+                    </button>
+                </form>
+                <div class="login-back">
+                    <a href="../index.html">← Back to Website</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Shell -->
+    <div class="dashboard" id="dashboard" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="../images/image.png" alt="Grace Logistics" class="sidebar-logo">
+                <span class="sidebar-title">Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active" data-section="overview">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="#" class="sidebar-link" data-section="rates">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    Rates
+                </a>
+                <a href="#" class="sidebar-link" data-section="users">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Users
+                </a>
+                <a href="#" class="sidebar-link" data-section="ports">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                    Ports
+                </a>
+                <a href="#" class="sidebar-link" data-section="containerTypes">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                        </path>
+                    </svg>
+                    Container Types
+                </a>
+                <a href="#" class="sidebar-link" data-section="commodityTypes">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path>
+                        <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path>
+                        <path d="M18 12a2 2 0 0 0 0 4h4v-4z"></path>
+                    </svg>
+                    Commodity Types
+                </a>
+                <a href="#" class="sidebar-link" data-section="pricingTiers">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    Pricing Tiers
+                </a>
+                <a href="#" class="sidebar-link" data-section="audit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Audit Log
+                </a>
+                <a href="#" class="sidebar-link" data-section="settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                        </path>
+                    </svg>
+                    Settings
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user" id="sidebarUser">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span id="adminEmailDisplay"></span>
+                </div>
+                <button class="sidebar-logout" id="btnDashboardLogout">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Log Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Mobile Header -->
+        <div class="mobile-header" id="mobileHeader">
+            <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <span class="mobile-title">Grace Admin</span>
+            <button class="mobile-logout" id="mobileLogout" title="Logout">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Overview Section -->
+            <section class="content-section active" id="section-overview">
+                <div class="section-top">
+                    <h1>Dashboard Overview</h1>
+                    <p>Welcome to the Grace Logistics admin panel</p>
+                </div>
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card stat-blue">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statTotalRates">0</span>
+                            <span class="stat-label">Total Rates</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-green">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statActiveRates">0</span>
+                            <span class="stat-label">Active Rates</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-purple">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statUsers">0</span>
+                            <span class="stat-label">Customers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-orange">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statPorts">0</span>
+                            <span class="stat-label">Ports</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rates Section -->
+            <section class="content-section" id="section-rates">
+                <div class="section-top">
+                    <div>
+                        <h1>Rate Management</h1>
+                        <p>Create, edit, and manage freight rates</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn-action btn-secondary" id="btnCsvDownload">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download CSV
+                        </button>
+                        <button class="btn-action btn-secondary" id="btnCsvUpload" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Upload CSV
+                        </button>
+                        <button class="btn-action btn-primary" id="btnNewRate">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New Rate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rate Filters -->
+                <div class="filters-bar" id="rateFilters">
+                    <div class="filter-group">
+                        <select id="filterOrigin" class="filter-select">
+                            <option value="">All Origins</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="filterDest" class="filter-select">
+                            <option value="">All Destinations</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="filterTier" class="filter-select">
+                            <option value="">All Tiers</option>
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="filterActive" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                    <button class="btn-filter-clear" id="btnClearFilters">Clear</button>
+                </div>
+
+                <!-- Rates Table -->
+                <div class="table-container">
+                    <table class="data-table" id="ratesTable">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="origin">Origin</th>
+                                <th class="sortable" data-sort="destination">Destination</th>
+                                <th>Container</th>
+                                <th class="sortable" data-sort="tier">Tier</th>
+                                <th class="sortable" data-sort="rate">Rate (USD)</th>
+                                <th>Transit</th>
+                                <th class="sortable" data-sort="valid_from">Valid From</th>
+                                <th class="sortable" data-sort="valid_to">Valid To</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ratesTableBody">
+                            <tr>
+                                <td colspan="10" class="table-empty">Loading rates...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section class="content-section" id="section-users">
+                <div class="section-top">
+                    <div>
+                        <h1>User Management</h1>
+                        <p>Manage customer accounts and pricing tiers</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn-action btn-primary" id="btnNewUser">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New User
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Business Reg #</th>
+                                <th>Role</th>
+                                <th>Pricing Tier</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr>
+                                <td colspan="9" class="table-empty">Loading users...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Audit Log Section -->
+            <section class="content-section" id="section-audit">
+                <div class="section-top">
+                    <div>
+                        <h1>Audit Log</h1>
+                        <p>Track all changes made to rates and users</p>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="auditTable">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Table</th>
+                                <th>Action</th>
+                                <th>Record ID</th>
+                                <th>Performed By</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auditTableBody">
+                            <tr>
+                                <td colspan="6" class="table-empty">Loading logs...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Ports Section -->
+            <section class="content-section" id="section-ports">
+                <div class="section-top">
+                    <div>
+                        <h1>Port Management</h1>
+                        <p>Add, edit, and manage ports</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn-action btn-primary" id="btnNewPort">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New Port
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="portsTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Country</th>
+                                <th>Port Code</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portsTableBody">
+                            <tr>
+                                <td colspan="5" class="table-empty">Loading ports...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Container Types Section -->
+            <section class="content-section" id="section-containerTypes">
+                <div class="section-top">
+                    <div>
+                        <h1>Container Types</h1>
+                        <p>Manage available container types for rates</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn-action btn-primary" id="btnNewContainerType">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New Type
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="containerTypesTable">
+                        <thead>
+                            <tr>
+                                <th>Name (Key)</th>
+                                <th>Label</th>
+                                <th>Sort Order</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="containerTypesTableBody">
+                            <tr>
+                                <td colspan="5" class="table-empty">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Commodity Types Section -->
+            <section class="content-section" id="section-commodityTypes">
+                <div class="section-top">
+                    <div>
+                        <h1>Commodity Types</h1>
+                        <p>Manage available commodity types for shipments</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn-action btn-primary" id="btnNewCommodityType">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New Commodity
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="commodityTypesTable">
+                        <thead>
+                            <tr>
+                                <th>Name (Key)</th>
+                                <th>Label</th>
+                                <th>Sort Order</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="commodityTypesTableBody">
+                            <tr>
+                                <td colspan="5" class="table-empty">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Pricing Tiers Section -->
+            <section class="content-section" id="section-pricingTiers">
+                <div class="section-top">
+                    <div>
+                        <h1>Pricing Tiers</h1>
+                        <p>Manage pricing tiers for customers</p>
+                    </div>
+                    <div class="section-actions">
+                        <button class="btn-action btn-primary" id="btnNewTier">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New Tier
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="pricingTiersTable">
+                        <thead>
+                            <tr>
+                                <th>Name (Key)</th>
+                                <th>Label</th>
+                                <th>Sort Order</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pricingTiersTableBody">
+                            <tr>
+                                <td colspan="5" class="table-empty">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="content-section" id="section-settings">
+                <div class="section-top">
+                    <div>
+                        <h1>Platform Settings</h1>
+                        <p>Configure fees and system-wide settings</p>
+                    </div>
+                </div>
+
+                <div class="table-container settings-grid">
+
+                    <!-- Row: B/L Fee -->
+                    <div class="settings-row">
+                        <div class="settings-row-info">
+                            <div class="settings-row-info-header">
+                                <div class="settings-icon settings-icon-indigo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                        <line x1="2" y1="10" x2="22" y2="10"></line>
+                                    </svg>
+                                </div>
+                                <span>Delivery Order (D/O) Fee</span>
+                            </div>
+                            <p>Added on top of the freight rate total for every customer booking request.</p>
+                        </div>
+                        <div class="settings-row-form">
+                            <div class="settings-field">
+                                <label for="settingBlFee">Amount (USD)</label>
+                                <input type="number" id="settingBlFee" min="0" step="0.01" placeholder="e.g. 150.00">
+                            </div>
+                            <div class="settings-actions">
+                                <button class="btn-action btn-primary" id="btnSaveBlFee">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
+                                        </path>
+                                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                        <polyline points="7 3 7 8 15 8"></polyline>
+                                    </svg>
+                                    Save D/O Fee
+                                </button>
+                                <span id="settingsMsg" class="settings-msg"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row: Contact Emails -->
+                    <div class="settings-row">
+                        <div class="settings-row-info">
+                            <div class="settings-row-info-header">
+                                <div class="settings-icon settings-icon-sky">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </div>
+                                <span>Booking Contact Emails</span>
+                            </div>
+                            <p>All booking requests are emailed to every address listed here. Add one address per line.
+                            </p>
+                        </div>
+                        <div class="settings-row-form">
+                            <div class="settings-field">
+                                <label for="settingContactEmail">Email Addresses <span class="label-hint">(one per
+                                        line)</span></label>
+                                <textarea id="settingContactEmail" rows="3"
+                                    placeholder="niroshan.s@gracelogisticslk.com&#10;ops@gracelogisticslk.com"></textarea>
+                            </div>
+                            <div class="settings-actions">
+                                <button class="btn-action btn-primary" id="btnSaveContactEmail">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
+                                        </path>
+                                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                        <polyline points="7 3 7 8 15 8"></polyline>
+                                    </svg>
+                                    Save Emails
+                                </button>
+                                <span id="settingsEmailMsg" class="settings-msg"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row: New User Emails -->
+                    <div class="settings-row">
+                        <div class="settings-row-info">
+                            <div class="settings-row-info-header">
+                                <div class="settings-icon settings-icon-green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M19 8v6"></path>
+                                        <path d="M22 11h-6"></path>
+                                    </svg>
+                                </div>
+                                <span>New User Notification Emails</span>
+                            </div>
+                            <p>Get notified when a new customer registers on the portal. Add one address per line.</p>
+                        </div>
+                        <div class="settings-row-form">
+                            <div class="settings-field">
+                                <label for="settingNewUserEmail">Email Addresses <span class="label-hint">(one per
+                                        line)</span></label>
+                                <textarea id="settingNewUserEmail" rows="3"
+                                    placeholder="admin@gracelogisticslk.com&#10;notify@gracelogisticslk.com"></textarea>
+                            </div>
+                            <div class="settings-actions">
+                                <button class="btn-action btn-primary" id="btnSaveNewUserEmail">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z">
+                                        </path>
+                                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                        <polyline points="7 3 7 8 15 8"></polyline>
+                                    </svg>
+                                    Save Emails
+                                </button>
+                                <span id="settingsNewUserMsg" class="settings-msg"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Rate Modal -->
+    <div class="admin-modal-overlay" id="rateModal">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2 id="rateModalTitle">New Rate</h2>
+                <button class="admin-modal-close" id="rateModalClose">×</button>
+            </div>
+            <form id="rateFormEl" class="admin-modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label for="rateOrigin">Origin Port <span class="req">*</span></label>
+                        <select id="rateOrigin" required></select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateDest">Destination Port <span class="req">*</span></label>
+                        <select id="rateDest" required></select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateContainer">Container Type <span class="req">*</span></label>
+                        <select id="rateContainer" required>
+                            <option value="">Select...</option>
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateTier">Pricing Tier <span class="req">*</span></label>
+                        <select id="rateTier" required>
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateValue">Rate (USD) <span class="req">*</span></label>
+                        <input type="number" id="rateValue" step="0.01" min="0" required placeholder="0.00">
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateTransit">Transit Time</label>
+                        <input type="text" id="rateTransit" placeholder="e.g. 14-18 days">
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateValidFrom">Valid From <span class="req">*</span></label>
+                        <input type="date" id="rateValidFrom" required>
+                    </div>
+                    <div class="modal-field">
+                        <label for="rateValidTo">Valid To <span class="req">*</span></label>
+                        <input type="date" id="rateValidTo" required>
+                    </div>
+                    <div class="modal-field modal-field-full">
+                        <label for="rateNotes">Internal Notes</label>
+                        <textarea id="rateNotes" rows="2" placeholder="Notes visible only to admin..."></textarea>
+                    </div>
+                    <div class="modal-field">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="rateActive" checked>
+                            <span class="toggle-switch"></span>
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <input type="hidden" id="rateEditId">
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="rateModalCancel">Cancel</button>
+                    <button type="submit" class="btn-action btn-primary" id="rateModalSave">Save Rate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div class="admin-modal-overlay" id="userModal">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2 id="userModalTitle">New User</h2>
+                <button class="admin-modal-close" id="userModalClose">×</button>
+            </div>
+            <form id="userFormEl" class="admin-modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label for="userFormFirstName">First Name</label>
+                        <input type="text" id="userFormFirstName" placeholder="John">
+                    </div>
+                    <div class="modal-field">
+                        <label for="userFormLastName">Last Name</label>
+                        <input type="text" id="userFormLastName" placeholder="Doe">
+                    </div>
+                    <div class="modal-field modal-field-full">
+                        <label for="userFormEmail">Email <span class="req">*</span></label>
+                        <input type="email" id="userFormEmail" required placeholder="user@example.com">
+                    </div>
+                    <div class="modal-field" id="passwordField">
+                        <label for="userFormPassword">Password <span class="req">*</span></label>
+                        <input type="password" id="userFormPassword" placeholder="Min 6 chars" minlength="6">
+                    </div>
+                    <div class="modal-field modal-field-full">
+                        <label for="userFormCompany">Company / Organization</label>
+                        <input type="text" id="userFormCompany" placeholder="e.g. Acme Trading Co.">
+                    </div>
+                    <div class="modal-field modal-field-full">
+                        <label for="userFormBusinessReg">Business Registration #</label>
+                        <input type="text" id="userFormBusinessReg" placeholder="e.g. BRN12345678">
+                    </div>
+                    <div class="modal-field">
+                        <label for="userFormTier">Pricing Tier</label>
+                        <select id="userFormTier">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="userFormRole">Role</label>
+                        <select id="userFormRole">
+                            <option value="customer">Customer</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="userFormActive" checked>
+                            <span class="toggle-switch"></span>
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <input type="hidden" id="userEditId">
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="userModalCancel">Cancel</button>
+                    <button type="submit" class="btn-action btn-primary" id="userModalSave">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- CSV Upload Modal -->
+    <div class="admin-modal-overlay" id="csvModal">
+        <div class="admin-modal" style="max-width:700px;">
+            <div class="admin-modal-header">
+                <h2>Bulk CSV Upload</h2>
+                <button class="admin-modal-close" id="csvModalClose">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+                <div class="csv-instructions">
+                    <p>Upload a CSV file with the following <strong>required</strong> columns:</p>
+                    <code>origin_code, destination_code, container_type, pricing_tier, rate_value, valid_from, valid_to</code>
+                    <p style="margin-top:0.35rem;font-size:0.8rem;color:#64748b;">Optional column: <code
+                            style="display:inline;padding:0.1rem 0.3rem;">transit_time</code></p>
+                    <div class="csv-example">
+                        <strong>Example row:</strong>
+                        <code>LKCMB, SGSIN, 20_dry_standard, public, 850.00, 2026-01-01, 2026-06-30, 5-7 days</code>
+                    </div>
+                    <div class="csv-validation-rules">
+                        <strong>Validation rules (entire upload fails if any row is invalid):</strong>
+                        <ul>
+                            <li>All required columns must be present in the header</li>
+                            <li>Origin &amp; destination port codes must exist in the system</li>
+                            <li>Container type must match an active container type</li>
+                            <li>Pricing tier must match an active pricing tier</li>
+                            <li>Rate value must be a positive number</li>
+                            <li>Dates must be valid (YYYY-MM-DD) and valid_from &le; valid_to</li>
+                            <li>No duplicate rows (same origin + destination + container + tier + date range)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="csv-dropzone" id="csvDropzone">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p>Drop CSV file here or <label for="csvFile" class="csv-browse">browse</label></p>
+                    <input type="file" id="csvFile" accept=".csv" style="display:none">
+                </div>
+                <div class="csv-errors" id="csvErrors" style="display:none;">
+                    <div class="csv-errors-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        <span id="csvErrorCount">Validation Failed</span>
+                    </div>
+                    <ul id="csvErrorList"></ul>
+                </div>
+                <div class="csv-preview" id="csvPreview" style="display:none;">
+                    <h4 id="csvPreviewTitle">Preview</h4>
+                    <div class="csv-preview-table" id="csvPreviewTable"></div>
+                </div>
+                <div class="csv-status" id="csvStatus"></div>
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="csvModalCancel">Cancel</button>
+                    <button type="button" class="btn-action btn-primary" id="btnCsvImport" disabled>Import
+                        Rates</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Port Modal -->
+    <div class="admin-modal-overlay" id="portModal">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2 id="portModalTitle">New Port</h2>
+                <button class="admin-modal-close" id="portModalClose">×</button>
+            </div>
+            <form id="portFormEl" class="admin-modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label for="portName">Port Name <span class="req">*</span></label>
+                        <input type="text" id="portName" required placeholder="e.g. Colombo">
+                    </div>
+                    <div class="modal-field">
+                        <label for="portCountry">Country <span class="req">*</span></label>
+                        <input type="text" id="portCountry" required placeholder="e.g. Sri Lanka">
+                    </div>
+                    <div class="modal-field">
+                        <label for="portCode">Port Code (UN/LOCODE)</label>
+                        <input type="text" id="portCode" placeholder="e.g. LKCMB">
+                    </div>
+                </div>
+                <input type="hidden" id="portEditId">
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="portModalCancel">Cancel</button>
+                    <button type="submit" class="btn-action btn-primary">Save Port</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Container Type Modal -->
+    <div class="admin-modal-overlay" id="ctModal">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2 id="ctModalTitle">New Container Type</h2>
+                <button class="admin-modal-close" id="ctModalClose">×</button>
+            </div>
+            <form id="ctFormEl" class="admin-modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label for="ctName">Name (Key) <span class="req">*</span></label>
+                        <input type="text" id="ctName" required placeholder="e.g. 40_flat_rack">
+                    </div>
+                    <div class="modal-field">
+                        <label for="ctLabel">Display Label <span class="req">*</span></label>
+                        <input type="text" id="ctLabel" required placeholder="e.g. 40' Flat Rack">
+                    </div>
+                    <div class="modal-field">
+                        <label for="ctSort">Sort Order</label>
+                        <input type="number" id="ctSort" value="0" min="0">
+                    </div>
+                    <div class="modal-field">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="ctActive" checked>
+                            <span class="toggle-switch"></span>
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <input type="hidden" id="ctEditId">
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="ctModalCancel">Cancel</button>
+                    <button type="submit" class="btn-action btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pricing Tier Modal -->
+    <div class="admin-modal-overlay" id="tierModal">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2 id="tierModalTitle">New Pricing Tier</h2>
+                <button class="admin-modal-close" id="tierModalClose">×</button>
+            </div>
+            <form id="tierFormEl" class="admin-modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label for="tierName">Name (Key) <span class="req">*</span></label>
+                        <input type="text" id="tierName" required placeholder="e.g. premium">
+                    </div>
+                    <div class="modal-field">
+                        <label for="tierLabel">Display Label <span class="req">*</span></label>
+                        <input type="text" id="tierLabel" required placeholder="e.g. Premium">
+                    </div>
+                    <div class="modal-field">
+                        <label for="tierSort">Sort Order</label>
+                        <input type="number" id="tierSort" value="0" min="0">
+                    </div>
+                    <div class="modal-field">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="tierActive" checked>
+                            <span class="toggle-switch"></span>
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <input type="hidden" id="tierEditId">
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="tierModalCancel">Cancel</button>
+                    <button type="submit" class="btn-action btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Commodity Type Modal -->
+    <div class="admin-modal-overlay" id="comModal">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2 id="comModalTitle">New Commodity Type</h2>
+                <button class="admin-modal-close" id="comModalClose">×</button>
+            </div>
+            <form id="comFormEl" class="admin-modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label for="comName">Name (Key) <span class="req">*</span></label>
+                        <input type="text" id="comName" required placeholder="e.g. hazardous">
+                    </div>
+                    <div class="modal-field">
+                        <label for="comLabel">Display Label <span class="req">*</span></label>
+                        <input type="text" id="comLabel" required placeholder="e.g. Hazardous Goods (DG)">
+                    </div>
+                    <div class="modal-field">
+                        <label for="comSort">Sort Order</label>
+                        <input type="number" id="comSort" value="0" min="0">
+                    </div>
+                    <div class="modal-field">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="comActive" checked>
+                            <span class="toggle-switch"></span>
+                            Active
+                        </label>
+                    </div>
+                </div>
+                <input type="hidden" id="comEditId">
+                <div class="admin-modal-footer">
+                    <button type="button" class="btn-action btn-cancel" id="comModalCancel">Cancel</button>
+                    <button type="submit" class="btn-action btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Audit Detail Modal -->
+    <div class="admin-modal-overlay" id="auditDetailModal">
+        <div class="admin-modal" style="max-width:640px;">
+            <div class="admin-modal-header">
+                <h2 id="auditDetailTitle">Audit Detail</h2>
+                <button class="admin-modal-close" id="auditDetailClose">&times;</button>
+            </div>
+            <div class="admin-modal-body" id="auditDetailBody">
+                <!-- Populated dynamically -->
+            </div>
+            <div class="audit-detail-footer">
+                <button class="btn-action btn-cancel" id="auditDetailDismiss">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

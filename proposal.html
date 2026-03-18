@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Proposal – Grace Logistics Digital Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --blue: #1e40af;
+            --blue-mid: #2D3FE8;
+            --blue-lt: #3b82f6;
+            --navy: #0f172a;
+            --slate: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --gold: #f59e0b;
+            --green: #10b981;
+            --red: #ef4444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--navy);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* ── Cover ── */
+        .cover {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1e40af 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 80% 20%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 60% at 10% 80%, rgba(45, 63, 232, 0.15) 0%, transparent 60%);
+        }
+
+        .cover-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .cover-inner {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 48px 64px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .cover-logo img {
+            height: 54px;
+            filter: brightness(0) invert(1);
+        }
+
+        .cover-tag {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.45);
+            text-transform: uppercase;
+        }
+
+        .cover-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cover-eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue-lt);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cover-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 2px;
+            background: var(--blue-lt);
+        }
+
+        .cover-title {
+            font-size: clamp(36px, 5vw, 62px);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .cover-title span {
+            color: var(--blue-lt);
+        }
+
+        .cover-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.62);
+            font-weight: 400;
+            max-width: 560px;
+            line-height: 1.75;
+            margin-bottom: 56px;
+        }
+
+        .cover-meta {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .cover-meta-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.38);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .cover-meta-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cover-meta-value .orig {
+            text-decoration: line-through;
+            opacity: 0.45;
+            margin-right: 6px;
+            font-weight: 400;
+        }
+
+        .cover-meta-value .disc {
+            color: #6ee7b7;
+        }
+
+        .cover-footer {
+            position: relative;
+            z-index: 2;
+            padding: 28px 64px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .cover-footer-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.32);
+        }
+
+        .cover-badge {
+            background: rgba(59, 130, 246, 0.18);
+            border: 1px solid rgba(59, 130, 246, 0.38);
+            color: var(--blue-lt);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border-radius: 100px;
+        }
+
+        /* ── Page Body ── */
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue-mid);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--blue-mid);
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(24px, 3vw, 34px);
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 680px;
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+
+        /* ── Executive Summary ── */
+        .exec-summary {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1px solid #bfdbfe;
+            border-radius: 16px;
+            padding: 40px 48px;
+            margin-bottom: 72px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exec-summary::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 32px;
+            font-size: 160px;
+            font-weight: 900;
+            color: rgba(59, 130, 246, 0.08);
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        .exec-summary-text {
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--navy);
+            font-weight: 400;
+            position: relative;
+        }
+
+        .exec-summary-text strong {
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        /* ── Scope Cards ── */
+        .scope-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .scope-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scope-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .scope-card.blue::after {
+            background: var(--blue-mid);
+        }
+
+        .scope-card.green::after {
+            background: var(--green);
+        }
+
+        .scope-card.gold::after {
+            background: var(--gold);
+        }
+
+        .scope-card:hover {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.07);
+        }
+
+        .scope-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .scope-icon.blue {
+            background: #eff6ff;
+        }
+
+        .scope-icon.green {
+            background: #ecfdf5;
+        }
+
+        .scope-icon.gold {
+            background: #fffbeb;
+        }
+
+        .scope-card-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .scope-card-desc {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* ── Screenshots ── */
+        .screenshot-block {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 36px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .screenshot-bar {
+            background: var(--navy);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.r {
+            background: #ff5f57;
+        }
+
+        .dot.y {
+            background: #febc2e;
+        }
+
+        .dot.g {
+            background: #28c840;
+        }
+
+        .screenshot-url {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.38);
+            font-family: monospace;
+        }
+
+        .screenshot-block img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 14px 24px;
+            font-size: 13px;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .screenshot-caption::before {
+            content: '↑';
+            color: var(--blue-lt);
+            font-weight: 700;
+        }
+
+        /* ── Features ── */
+        .feature-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 13px 16px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--navy);
+        }
+
+        .feature-check {
+            width: 20px;
+            height: 20px;
+            background: #ecfdf5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .feature-check svg {
+            width: 11px;
+            height: 11px;
+            stroke: var(--green);
+            stroke-width: 2.5;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 16px;
+            bottom: 16px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--blue-mid), var(--blue-lt));
+            border-radius: 2px;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 28px;
+        }
+
+        .tl-dot {
+            width: 58px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .tl-circle {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 0 4px white, 0 0 0 6px #dbeafe;
+            margin-top: 4px;
+        }
+
+        .tl-content {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 26px;
+            flex: 1;
+        }
+
+        .tl-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tl-phase {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .tl-week {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--blue);
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 4px 12px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .tl-desc {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .tl-tasks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tl-task {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--navy);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* ── Pricing ── */
+        .pricing-table {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+        }
+
+        .pricing-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table thead {
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: white;
+        }
+
+        .pricing-table thead th {
+            padding: 18px 24px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pricing-table thead th:last-child {
+            text-align: right;
+        }
+
+        .pricing-table tbody tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .pricing-table tbody td {
+            padding: 16px 24px;
+            font-size: 14px;
+            color: var(--navy);
+            vertical-align: top;
+        }
+
+        .pricing-table tbody td:last-child {
+            text-align: right;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--blue);
+        }
+
+        .item-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .item-desc {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .pricing-subtotal {
+            background: #f8fafc;
+            border-top: 2px solid var(--border);
+        }
+
+        .pricing-subtotal td {
+            padding: 14px 24px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .pricing-subtotal td:last-child {
+            font-size: 16px;
+            color: var(--muted);
+            text-decoration: line-through;
+        }
+
+        .pricing-total {
+            background: linear-gradient(135deg, #1e40af, #2D3FE8);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .pricing-total-label {
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .pricing-total-sub {
+            font-size: 12px;
+            opacity: 0.55;
+            margin-top: 3px;
+        }
+
+        .pricing-total-amount {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .pricing-total-amount .aud-label {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.65;
+            margin-right: 4px;
+        }
+
+        .savings-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #dcfce7;
+            border: 1px solid #86efac;
+            color: #15803d;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 12px;
+            padding: 14px 20px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        /* ── Recurring Costs ── */
+        .recurring-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .recurring-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .recurring-card .amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .recurring-card .period {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .recurring-card .label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* ── Tech Stack ── */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .tech-pill span {
+            font-size: 18px;
+        }
+
+        /* ── Deliverables ── */
+        .deliverables-list {
+            list-style: none;
+            margin-bottom: 48px;
+        }
+
+        .deliverables-list li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+            color: var(--navy);
+        }
+
+        .deliverables-list li:last-child {
+            border-bottom: none;
+        }
+
+        .deliverables-list li::before {
+            content: '✓';
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ── CTA ── */
+        .cta-block {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            border-radius: 24px;
+            padding: 64px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(59, 130, 246, 0.2), transparent);
+        }
+
+        .cta-block * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-block h2 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-block p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-divider {
+            width: 1px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.14);
+            margin: 0 auto 36px;
+        }
+
+        .sig-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .sig-title {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 20px;
+        }
+
+        .sig-contact {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .sig-contact a {
+            color: var(--blue-lt);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 64px 0;
+        }
+
+        @media (max-width: 640px) {
+            .cover-inner {
+                padding: 32px 24px;
+            }
+
+            .cover-footer {
+                padding: 20px 24px;
+            }
+
+            .page {
+                padding: 48px 20px;
+            }
+
+            .feature-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-block {
+                padding: 40px 24px;
+            }
+
+            .cover-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+        }
+
+        @media print {
+            .cover {
+                min-height: 100vh;
+                page-break-after: always;
+            }
+
+            body {
+                font-size: 13px;
+            }
+
+            .page {
+                padding: 48px 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ COVER ═══════════════ -->
+    <div class="cover">
+        <div class="cover-grid"></div>
+        <div class="cover-inner">
+            <div class="cover-header">
+                <div class="cover-logo">
+                    <img src="images/image.png" alt="Grace Logistics">
+                </div>
+                <span class="cover-tag">Prepared Exclusively for Grace Logistics</span>
+            </div>
+            <div class="cover-body">
+                <div class="cover-eyebrow">Project Proposal &amp; Quote</div>
+                <h1 class="cover-title">
+                    Digital Freight<br>
+                    <span>Rate Platform</span><br>
+                    &amp; Admin System
+                </h1>
+                <p class="cover-subtitle">
+                    A custom-built web platform enabling Grace Logistics to publish live freight rates online, manage
+                    customer bookings, and administer all platform data through a secure, role-based admin dashboard.
+                </p>
+                <div class="cover-meta">
+                    <div class="cover-meta-item">
+                        <div class="cover-meta-label">Date Prepared</div>
+                        <div class="cover-meta-value">3 March 2026</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="cover-meta-label">Completion Date</div>
+                        <div class="cover-meta-value">By 20 March 2026</div>
+                    </div>
+                    <div class="cover-meta-item">
+                        <div class="cover-meta-label">Investment</div>
+                        <div class="cover-meta-value">
+                            <span class="orig">AUD $2,500</span>
+                            <span class="disc">AUD $2,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cover-footer">
+            <span class="cover-footer-text">Confidential — Prepared exclusively for Grace Logistics</span>
+            <span class="cover-badge">CONFIDENTIAL</span>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════ CONTENT ═══════════════ -->
+    <div class="page">
+
+        <!-- Executive Summary -->
+        <div class="section" style="margin-top:0;">
+            <div class="section-label">Overview</div>
+            <h2 class="section-title">Executive Summary</h2>
+            <div class="exec-summary">
+                <p class="exec-summary-text">
+                    This proposal outlines the development of a <strong>custom digital freight rate platform</strong>
+                    for Grace Logistics — a leading logistics and supply chain provider in Sri Lanka. The system will
+                    empower Grace Logistics to <strong>publish live freight rates on their existing website</strong>,
+                    allow customers to search and request bookings in real time, and provide administrators with a
+                    <strong>secure, full-featured dashboard</strong> to manage rates, ports, users, container types,
+                    commodity types, and pricing tiers — no technical knowledge required.<br><br>
+                    The platform replaces manual quoting processes with an always-on, automated system, positioning
+                    Grace Logistics as a <strong>technology-first freight forwarder</strong> in a competitive market.
+                    The project will be fully delivered and live on <strong>gracelogisticslk.com by 20 March
+                        2026</strong>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Scope of Work -->
+        <div class="section">
+            <div class="section-label">Scope</div>
+            <h2 class="section-title">What We're Building</h2>
+            <p class="section-desc">Two tightly integrated products delivered as a single cohesive platform — a
+                customer-facing rate portal and a powerful admin control centre — deployed to your existing domain.</p>
+            <div class="scope-grid">
+                <div class="scope-card blue">
+                    <div class="scope-icon blue">🌐</div>
+                    <div class="scope-card-title">Customer Rate Portal</div>
+                    <div class="scope-card-desc">A public-facing page on gracelogisticslk.com where customers search
+                        freight rates by origin, destination, container type, and commodity. Displays live pricing and
+                        allows direct booking requests.</div>
+                </div>
+                <div class="scope-card green">
+                    <div class="scope-icon green">🔐</div>
+                    <div class="scope-card-title">Admin Dashboard</div>
+                    <div class="scope-card-desc">A secure, login-protected admin panel giving your team complete control
+                        over all platform data — rates, ports, users, container types, commodity types, pricing tiers,
+                        and a full audit log.</div>
+                </div>
+                <div class="scope-card gold">
+                    <div class="scope-icon gold">⚡</div>
+                    <div class="scope-card-title">Cloud Database &amp; Auth</div>
+                    <div class="scope-card-desc">Powered by a managed PostgreSQL database with row-level security and
+                        role-based authentication. Zero server maintenance. Scales automatically and backed up daily.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Rate Portal -->
+        <div class="section">
+            <div class="section-label">Module 1</div>
+            <h2 class="section-title">Customer Freight Rate Portal</h2>
+            <p class="section-desc">Customers visit the Rates page on gracelogisticslk.com, fill in their shipment
+                details, and instantly see matching freight rates with transit times and pricing — then request a
+                booking with one click.</p>
+
+            <div class="screenshot-block">
+                <div class="screenshot-bar">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                    <div class="screenshot-url">gracelogisticslk.com/rates</div>
+                </div>
+                <img src="images/screenshot_rates1.png" alt="Customer Rate Search Portal">
+                <div class="screenshot-caption">Actual rate search portal — hero background, search form, with Commodity
+                    Type and Cargo Ready Date fields</div>
+            </div>
+
+            <div class="feature-columns">
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Port of Loading &amp; Discharge with live search
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Container type selection (20ft, 40ft, Reefer &amp; more)
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Container quantity selector with auto-calculated totals
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Optional commodity type field (17 freight categories)
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Cargo weight and ready date optional fields
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Live rate results with USD pricing &amp; transit time
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Tiered pricing — Public, Standard, Tier 1 per customer
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Booking request email delivered to your team instantly
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Admin Panel -->
+        <div class="section">
+            <div class="section-label">Module 2</div>
+            <h2 class="section-title">Admin Control Dashboard</h2>
+            <p class="section-desc">A private, login-protected command centre giving your operations team complete
+                control over every aspect of the platform — add new rates, manage ports, toggle pricing tiers, and
+                review every change in the audit log.</p>
+
+            <div class="screenshot-block">
+                <div class="screenshot-bar">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                    <div class="screenshot-url">gracelogisticslk.com/admin — Rate Management</div>
+                </div>
+                <img src="images/screenshot_admin.png" alt="Admin Dashboard">
+                <div class="screenshot-caption">Actual admin dashboard — Rate Management with sidebar navigation,
+                    filters, tier badges, and Edit/Dup/Del actions</div>
+            </div>
+
+            <div class="feature-columns">
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Secure admin login with role-based access
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Add, edit, duplicate and delete freight rates
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Bulk rate upload via CSV import
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Port management (name, country, UN/LOCODE)
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Container types — fully configurable by admin
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Commodity types — add, edit, activate/deactivate
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Customer user management &amp; pricing tier assignment
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><svg viewBox="0 0 12 12" fill="none">
+                            <polyline points="2,6 5,9 10,3" />
+                        </svg></div>Full audit log — every change tracked &amp; timestamped
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Technology -->
+        <div class="section">
+            <div class="section-label">Architecture</div>
+            <h2 class="section-title">Technology Stack</h2>
+            <p class="section-desc">Built with modern, battle-tested technologies. No vendor lock-in. Fully cloud-hosted
+                with enterprise-grade security and 99.9% uptime SLA.</p>
+            <div class="tech-grid">
+                <div class="tech-pill"><span>🌐</span> HTML5 / CSS3</div>
+                <div class="tech-pill"><span>⚡</span> Vanilla JavaScript</div>
+                <div class="tech-pill"><span>🗄️</span> Supabase (PostgreSQL)</div>
+                <div class="tech-pill"><span>🔐</span> Row-Level Security</div>
+                <div class="tech-pill"><span>🔑</span> JWT Authentication</div>
+                <div class="tech-pill"><span>☁️</span> Cloud Hosting (CDN)</div>
+                <div class="tech-pill"><span>📱</span> Fully Responsive</div>
+                <div class="tech-pill"><span>🔒</span> SSL / HTTPS</div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Timeline -->
+        <div class="section">
+            <div class="section-label">Project Plan</div>
+            <h2 class="section-title">Delivery Timeline — by 20 March 2026</h2>
+            <p class="section-desc">A focused 17-day delivery plan structured across four phases, with client check-in
+                points built in at each stage.</p>
+
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-dot">
+                        <div class="tl-circle">1</div>
+                    </div>
+                    <div class="tl-content">
+                        <div class="tl-header">
+                            <span class="tl-phase">Kickoff &amp; Architecture</span>
+                            <span class="tl-week">3 – 5 March 2026</span>
+                        </div>
+                        <p class="tl-desc">Final requirements confirmed, database schema finalised, cloud infrastructure
+                            provisioned, authentication configured, and initial data migration prepared.</p>
+                        <div class="tl-tasks">
+                            <span class="tl-task">DB schema &amp; migrations</span>
+                            <span class="tl-task">Cloud setup</span>
+                            <span class="tl-task">Auth &amp; RLS</span>
+                            <span class="tl-task">Data seed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-item">
+                    <div class="tl-dot">
+                        <div class="tl-circle">2</div>
+                    </div>
+                    <div class="tl-content">
+                        <div class="tl-header">
+                            <span class="tl-phase">Admin Dashboard Build</span>
+                            <span class="tl-week">6 – 10 March 2026</span>
+                        </div>
+                        <p class="tl-desc">Full admin panel developed — login, all CRUD modules (rates, ports, users,
+                            container types, commodity types, pricing tiers), CSV bulk upload, and audit log.</p>
+                        <div class="tl-tasks">
+                            <span class="tl-task">Rate management</span>
+                            <span class="tl-task">User management</span>
+                            <span class="tl-task">CSV import</span>
+                            <span class="tl-task">Audit log</span>
+                            <span class="tl-task">All lookup tables</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-item">
+                    <div class="tl-dot">
+                        <div class="tl-circle">3</div>
+                    </div>
+                    <div class="tl-content">
+                        <div class="tl-header">
+                            <span class="tl-phase">Customer Rate Portal Build</span>
+                            <span class="tl-week">11 – 15 March 2026</span>
+                        </div>
+                        <p class="tl-desc">Customer-facing rate search page built — form, live results, booking modal,
+                            email delivery, tiered pricing logic, commodity type integration, and mobile responsiveness.
+                        </p>
+                        <div class="tl-tasks">
+                            <span class="tl-task">Search form</span>
+                            <span class="tl-task">Live rate results</span>
+                            <span class="tl-task">Booking flow</span>
+                            <span class="tl-task">Email delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tl-item">
+                    <div class="tl-dot">
+                        <div class="tl-circle">4</div>
+                    </div>
+                    <div class="tl-content">
+                        <div class="tl-header">
+                            <span class="tl-phase">Testing, QA &amp; Go-Live</span>
+                            <span class="tl-week">16 – 20 March 2026</span>
+                        </div>
+                        <p class="tl-desc">Cross-browser and mobile testing, security review, client UAT session, final
+                            revisions, deployment to gracelogisticslk.com, admin training walkthrough, and handover of
+                            all credentials.</p>
+                        <div class="tl-tasks">
+                            <span class="tl-task">QA &amp; testing</span>
+                            <span class="tl-task">Client UAT</span>
+                            <span class="tl-task">Deploy to live domain</span>
+                            <span class="tl-task">Admin training</span>
+                            <span class="tl-task">Handover</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Pricing -->
+        <div class="section">
+            <div class="section-label">Investment</div>
+            <h2 class="section-title">Project Cost Breakdown</h2>
+            <p class="section-desc">Fixed price — no hourly surprises. All items below are included in the quoted total.
+                Invoiced in Australian Dollars (AUD).</p>
+
+            <div class="pricing-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Deliverable</th>
+                            <th>Description</th>
+                            <th style="text-align:right">Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td>
+                                <div class="item-title">Database &amp; Authentication</div>
+                            </td>
+                            <td>
+                                <div class="item-desc">PostgreSQL schema, row-level security, RPC functions, user auth
+                                    &amp; role system</div>
+                            </td>
+                            <td>AUD $500</td>
+                        </tr>
+                        <tr>
+                            <td>02</td>
+                            <td>
+                                <div class="item-title">Admin Dashboard</div>
+                            </td>
+                            <td>
+                                <div class="item-desc">Full CRUD — rates, ports, users, container types, commodity
+                                    types, tiers, CSV upload, audit log</div>
+                            </td>
+                            <td>AUD $900</td>
+                        </tr>
+                        <tr>
+                            <td>03</td>
+                            <td>
+                                <div class="item-title">Customer Rate Search Portal</div>
+                            </td>
+                            <td>
+                                <div class="item-desc">Rate search, live results, booking modal, tiered pricing, email
+                                    delivery to your team</div>
+                            </td>
+                            <td>AUD $700</td>
+                        </tr>
+                        <tr>
+                            <td>04</td>
+                            <td>
+                                <div class="item-title">Testing, QA &amp; Deployment</div>
+                            </td>
+                            <td>
+                                <div class="item-desc">Cross-browser testing, security review, deployment to
+                                    gracelogisticslk.com, admin training session</div>
+                            </td>
+                            <td>AUD $400</td>
+                        </tr>
+                        <tr class="pricing-subtotal">
+                            <td colspan="3" style="font-weight:600; color:var(--muted);">Standard Rate (before discount)
+                            </td>
+                            <td style="font-weight:700; font-size:16px;">AUD $2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pricing-total">
+                    <div>
+                        <div class="pricing-total-label">YOUR DISCOUNTED TOTAL</div>
+                        <div class="pricing-total-sub">Fixed price · AUD · includes 30 days post-launch support</div>
+                    </div>
+                    <div class="pricing-total-amount">
+                        <span class="aud-label">AUD</span>$2,000
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ongoing Costs -->
+        <div class="section">
+            <div class="section-label">Ongoing</div>
+            <h2 class="section-title">Estimated Monthly Running Costs</h2>
+            <p class="section-desc">These are third-party infrastructure costs billed directly to Grace Logistics — not
+                included in the development fee. The platform can run at zero ongoing cost on free tiers.</p>
+            <div class="recurring-grid">
+                <div class="recurring-card">
+                    <div class="amount">$0</div>
+                    <div class="period">/ month</div>
+                    <div class="label">Supabase Free Tier</div>
+                </div>
+                <div class="recurring-card">
+                    <div class="amount">~$25</div>
+                    <div class="period">/ month AUD</div>
+                    <div class="label">Supabase Pro (if scaled)</div>
+                </div>
+                <div class="recurring-card">
+                    <div class="amount">$20</div>
+                    <div class="period">/ month AUD</div>
+                    <div class="label">Hosting</div>
+                </div>
+                <div class="recurring-card">
+                    <div class="amount">Existing</div>
+                    <div class="period">&nbsp;</div>
+                    <div class="label">Domain (already owned)</div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Deliverables -->
+        <div class="section">
+            <div class="section-label">What You Receive</div>
+            <h2 class="section-title">Deliverables Summary</h2>
+            <ul class="deliverables-list">
+                <li>Fully functional Customer Rate Search Portal, live on gracelogisticslk.com</li>
+                <li>Secure Admin Dashboard with all CRUD modules fully operational</li>
+                <li>Cloud database with initial data seeded (ports, container types, commodity types)</li>
+                <li>30-day post-launch support &amp; bug fix period included</li>
+                <li>Admin training session </li>
+            </ul>
+        </div>
+
+        <hr class="hr">
+
+        <!-- CTA -->
+        <div class="cta-block">
+            <h2>Ready to Go Live by 20 March?</h2>
+            <p>Reply with your acceptance of this proposal and work can begin immediately. A formal invoice will follow
+                within 24 hours of your confirmation.</p>
+            <div class="cta-divider"></div>
+            <div class="sig-name">Yujith Perera</div>
+            <div class="sig-title"></div>
+            <div class="sig-contact">
+                <a href="mailto:yujith@example.com">yujith@gmail.com</a>
+                <a href="tel:+61400000000">+61 433 464 046</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-bottom: 20px;">
+            <p style="font-size: 13px; color: var(--muted);">Powered by <a href="https://mustardlabs.org"
+                    target="_blank" rel="noopener"
+                    style="color: var(--blue-lt); text-decoration: none; font-weight: 600;">Mustard Labs</a></p>
+        </div>
+
+    </div>
+</body>
+
+</html>

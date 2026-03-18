@@ -1,0 +1,5 @@
+Origin,Origin Country,Origin Code,Destination,Destination Country,Destination Code,Container Type,Pricing Tier,Rate (USD),Transit Time,Valid From,Valid To,Status
+Chittagong,Bangladesh,BDCGP,Shanghai,China,CNSHA,20' Dry Standard,Public,700.00,16,2026-02-20,2026-03-21,Active
+Chittagong,Bangladesh,BDCGP,Shanghai,China,CNSHA,20' Dry Standard,Public,700.00,16,2026-02-20,2026-03-21,Active
+Colombo,Sri Lanka,LKCMB,Shanghai,China,CNSHA,20' Dry Standard,Tier 1,850.00,16,2026-02-20,2026-03-21,Active
+Colombo,Sri Lanka,LKCMB,Shanghai,China,CNSHA,20' Dry Standard,Public,865.00,16,2026-02-20,2026-03-21,Active
