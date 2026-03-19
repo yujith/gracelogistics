@@ -91,11 +91,11 @@ Deno.serve(async (req: Request) => {
             ? `<tr><td style="padding:10px 16px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6;">Commodity</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#1f2937;border-bottom:1px solid #f3f4f6;text-align:right;">${commodity}</td></tr>`
             : "";
 
-        // Build the D/L Fee row if present
+        // Build the D/O Fee row if present
         const blFeeVal = parseFloat(blFee || "0");
         const blRow =
             blFeeVal > 0
-                ? `<tr><td style="padding:10px 16px;color:#6366f1;font-size:14px;border-bottom:1px solid #f3f4f6;">D/L Fee</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#6366f1;border-bottom:1px solid #f3f4f6;text-align:right;">$${blFeeVal.toFixed(2)} USD</td></tr>`
+                ? `<tr><td style="padding:10px 16px;color:#6366f1;font-size:14px;border-bottom:1px solid #f3f4f6;">D/O Fee</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#6366f1;border-bottom:1px solid #f3f4f6;text-align:right;">$${blFeeVal.toFixed(2)} USD</td></tr>`
                 : "";
 
         // Generate a date-based reference ID: GL-YYYYMMDD-HHmm

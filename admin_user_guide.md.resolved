@@ -294,14 +294,14 @@ Configure system-wide platform settings.
 
 ![Platform Settings](/Users/yujithperera/.gemini/antigravity/brain/86bfbafd-d417-468b-ba06-160d77b000d7/screenshot_settings_1773191257949.png)
 
-### Bill of Lading (B/L) Fee
+### Delivery Order (D/O) Fee
 
 | Field | Description |
 |-------|-------------|
-| **Amount (USD)** | The B/L fee added to every booking request's grand total |
+| **Amount (USD)** | The D/O fee added to every booking request's grand total |
 
 - Enter the fee amount in USD
-- Click **Save B/L Fee** to update
+- Click **Save D/O Fee** to update
 - This fee is shown on the public rates page as a separate line item
 
 ### Booking Contact Emails

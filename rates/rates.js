@@ -276,7 +276,7 @@
         }
     }
 
-    // ─── Load Platform Settings (B/L Fee etc.) ───
+    // ─── Load Platform Settings (D/O Fee etc.) ───
     async function loadSettings() {
         try {
             const { data, error } = await supabase
@@ -553,7 +553,7 @@
             const validTo = new Date(rate.valid_to).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
             const blLine = BL_FEE > 0
-                ? `<div class="rate-detail" style="color:#6366f1;font-size:13px;">+ D/L Fee: <strong>$${BL_FEE.toLocaleString('en-US', { minimumFractionDigits: 2 })}</strong></div>`
+                ? `<div class="rate-detail" style="color:#6366f1;font-size:13px;">+ D/O Fee: <strong>$${BL_FEE.toLocaleString('en-US', { minimumFractionDigits: 2 })}</strong></div>`
                 : '';
 
             const card = document.createElement('div');
@@ -596,7 +596,7 @@
                             Valid ${validFrom} – ${validTo}
                         </div>
                     </div>
-                    <div class="total-price">Total: $${parseFloat(grandTotal).toLocaleString('en-US', { minimumFractionDigits: 2 })} <span style="font-size:11px;opacity:0.65;font-weight:500;">incl. D/L</span></div>
+                    <div class="total-price">Total: $${parseFloat(grandTotal).toLocaleString('en-US', { minimumFractionDigits: 2 })} <span style="font-size:11px;opacity:0.65;font-weight:500;">incl. D/O</span></div>
                     <button class="btn-book" data-rate-id="${rate.id}" data-origin="${rate.origin_name}, ${rate.origin_country}" data-dest="${rate.destination_name}, ${rate.destination_country}" data-container="${CONTAINER_LABELS[rate.container_type]}" data-qty="${qty}" data-rate="${rate.rate_value}" data-freight="${freight.toFixed(2)}" data-bl="${BL_FEE.toFixed(2)}" data-total="${grandTotal}" data-commodity="${els.commodityType.value ? (COMMODITY_LABELS[els.commodityType.value] || els.commodityType.value) : ''}" data-readydate="${els.readyDate.value || ''}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                         Request Booking
@@ -616,7 +616,7 @@
     function openBookingModal(data) {
         const commodityLine = data.commodity ? `<div class="booking-detail"><span>Commodity:</span><strong>${data.commodity}</strong></div>` : '';
         const blLine = parseFloat(data.bl) > 0
-            ? `<div class="booking-detail" style="color:#6366f1;"><span>D/L Fee:</span><strong>$${parseFloat(data.bl).toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</strong></div>`
+            ? `<div class="booking-detail" style="color:#6366f1;"><span>D/O Fee:</span><strong>$${parseFloat(data.bl).toLocaleString('en-US', { minimumFractionDigits: 2 })} USD</strong></div>`
             : '';
         const readyDateLine = data.readydate ? `<div class="booking-detail"><span>Cargo Ready Date:</span><strong>${data.readydate}</strong></div>` : '';
         els.bookingSummary.innerHTML = `

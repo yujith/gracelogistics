@@ -1,5 +1,5 @@
 -- ============================================================
--- migration_v5.sql — Platform Settings (B/L Fee)
+-- migration_v5.sql — Platform Settings (D/O Fee)
 -- Run this in your Supabase SQL Editor
 -- ============================================================
 
@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS platform_settings (
 
 -- Seed with initial settings
 INSERT INTO platform_settings (key, value, label, description) VALUES
-    ('bl_fee', '150', 'Bill of Lading (B/L) Fee', 'Fee charged per booking for issuing the Bill of Lading (USD)'),
+    ('bl_fee', '150', 'Delivery Order (D/O) Fee', 'Fee charged per booking for issuing the Delivery Order (USD)'),
     ('contact_email', 'niroshan.s@gracelogisticslk.com', 'Booking Contact Email', 'Email address that receives booking requests')
 ON CONFLICT (key) DO NOTHING;
 
 -- Enable RLS
 ALTER TABLE platform_settings ENABLE ROW LEVEL SECURITY;
 
--- Public can read settings (needed for rates page to load bl_fee)
+-- Public can read settings (needed for rates page to load D/O fee)
 CREATE POLICY "Public read platform_settings"
     ON platform_settings FOR SELECT
     TO public
