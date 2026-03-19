@@ -165,7 +165,28 @@
         }
         console.log('[GL] Supabase client created');
 
-        // ── 4. Auth state listener — blocks EVERYTHING during recovery ──
+        // ── 4. Restore session BEFORE registering the auth listener ──
+        // In Supabase JS v2, calling getSession() after onAuthStateChange can
+        // hang forever due to an internal lock. Calling it first avoids this.
+        // A timeout guard ensures we never block init() indefinitely.
+        try {
+            if (!pendingRecovery) {
+                const sessionPromise = supabase.auth.getSession();
+                const timeout = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('getSession timed out')), 5000)
+                );
+                const { data: { session } } = await Promise.race([sessionPromise, timeout]);
+                console.log('[GL] getSession resolved, session:', !!session);
+                if (session) {
+                    await handleAuthChange(session);
+                }
+            }
+        } catch (e) {
+            console.error('[GL] Session restore failed (non-fatal):', e);
+        }
+        console.log('[GL] Session restore done');
+
+        // ── 5. Auth state listener — registered AFTER getSession ──
         supabase.auth.onAuthStateChange(async (event, session) => {
             // During recovery, suppress ALL events that would show the user as logged in.
             // The only thing we allow is PASSWORD_RECOVERY (to redundantly ensure the modal is open).
@@ -186,20 +207,6 @@
                 updateAuthUI();
             }
         });
-
-        // ── 5. For normal visits, load the existing session ──
-        // Wrapped in try/catch so a failed auth check never prevents bindEvents().
-        try {
-            if (!pendingRecovery) {
-                const { data: { session } } = await supabase.auth.getSession();
-                if (session) {
-                    await handleAuthChange(session);
-                }
-            }
-        } catch (e) {
-            console.error('[GL] Session restore failed (non-fatal):', e);
-        }
-        console.log('[GL] Session restore done');
 
         // Preload data — each loader has its own try/catch, but wrap the
         // Promise.all as defence-in-depth so bindEvents() always runs.
