@@ -185,17 +185,27 @@
         });
 
         // ── 5. For normal visits, load the existing session ──
-        if (!pendingRecovery) {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                await handleAuthChange(session);
+        // Wrapped in try/catch so a failed auth check never prevents bindEvents().
+        try {
+            if (!pendingRecovery) {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session) {
+                    await handleAuthChange(session);
+                }
             }
+        } catch (e) {
+            console.error('Session restore failed (non-fatal):', e);
         }
 
-        // Preload data
-        await Promise.all([loadPorts(), loadContainerTypes(), loadPricingTiers(), loadCommodityTypes(), loadSettings()]);
+        // Preload data — each loader has its own try/catch, but wrap the
+        // Promise.all as defence-in-depth so bindEvents() always runs.
+        try {
+            await Promise.all([loadPorts(), loadContainerTypes(), loadPricingTiers(), loadCommodityTypes(), loadSettings()]);
+        } catch (e) {
+            console.error('Data preload failed (non-fatal):', e);
+        }
 
-        // Bind events
+        // Bind events — MUST run regardless of any earlier failures
         bindEvents();
 
         // Set min date for ready date
