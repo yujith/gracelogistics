@@ -132,6 +132,7 @@
     let pendingRecovery = false;
 
     async function init() {
+        console.log('[GL] init() started');
         initElements();
 
         // ── 1. Detect recovery flow BEFORE Supabase sees the URL ──
@@ -150,6 +151,7 @@
         }
 
         // ── 3. Create Supabase client ──
+        console.log('[GL] window.supabase =', typeof window.supabase);
         try {
             supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
                 auth: {
@@ -158,9 +160,10 @@
                 }
             });
         } catch (e) {
-            console.error('Supabase initialization failed:', e);
+            console.error('[GL] Supabase initialization failed:', e);
             return;
         }
+        console.log('[GL] Supabase client created');
 
         // ── 4. Auth state listener — blocks EVERYTHING during recovery ──
         supabase.auth.onAuthStateChange(async (event, session) => {
@@ -194,18 +197,21 @@
                 }
             }
         } catch (e) {
-            console.error('Session restore failed (non-fatal):', e);
+            console.error('[GL] Session restore failed (non-fatal):', e);
         }
+        console.log('[GL] Session restore done');
 
         // Preload data — each loader has its own try/catch, but wrap the
         // Promise.all as defence-in-depth so bindEvents() always runs.
         try {
             await Promise.all([loadPorts(), loadContainerTypes(), loadPricingTiers(), loadCommodityTypes(), loadSettings()]);
         } catch (e) {
-            console.error('Data preload failed (non-fatal):', e);
+            console.error('[GL] Data preload failed (non-fatal):', e);
         }
+        console.log('[GL] Data preload done, portsCache length:', portsCache.length);
 
         // Bind events — MUST run regardless of any earlier failures
+        console.log('[GL] Calling bindEvents()');
         bindEvents();
 
         // Set min date for ready date
@@ -408,8 +414,9 @@
 
             if (error) throw error;
             portsCache = data || [];
+            console.log('[GL] loadPorts: loaded', portsCache.length, 'ports');
         } catch (e) {
-            console.error('Failed to load ports:', e);
+            console.error('[GL] Failed to load ports:', e);
             portsCache = [];
         }
     }
@@ -760,10 +767,12 @@
     function bindEvents() {
         // Port autocomplete
         els.originPort.addEventListener('input', () => {
+            console.log('[GL] originPort input event, value:', els.originPort.value, 'portsCache:', portsCache.length);
             clearTimeout(originDebounce);
             els.originPortId.value = '';
             originDebounce = setTimeout(() => {
                 const results = filterPorts(els.originPort.value);
+                console.log('[GL] filterPorts returned', results.length, 'results');
                 renderDropdown(els.originDropdown, results, els.originPort, els.originPortId);
             }, 150);
         });
