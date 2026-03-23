@@ -607,6 +607,7 @@
         document.getElementById('userFormEmail').value = user ? user.email : '';
         document.getElementById('userFormPassword').value = '';
         document.getElementById('userFormCompany').value = user ? (user.company || '') : '';
+        document.getElementById('userFormBusinessReg').value = user ? (user.business_registration_number || '') : '';
         document.getElementById('userFormTier').value = user ? user.pricing_tier : 'public';
         document.getElementById('userFormRole').value = user ? user.role : 'customer';
         document.getElementById('userFormActive').checked = user ? user.active : true;

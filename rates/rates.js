@@ -859,9 +859,9 @@
             els.btnSearch.innerHTML = '<span class="spinner-small"></span> Searching...';
 
             try {
-                // Safety timeout: abort after 15 seconds to prevent infinite loading
+                // Safety timeout: abort after 8 seconds to prevent infinite loading
                 const timeoutPromise = new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error('Search timed out')), 15000)
+                    setTimeout(() => reject(new Error('Search timed out')), 8000)
                 );
                 const rates = await Promise.race([
                     searchRates(originId, destId, containerType),
@@ -881,7 +881,21 @@
             } catch (error) {
                 console.error('Search failed:', error);
                 els.resultsLoading.style.display = 'none';
-                els.noResults.style.display = 'block';
+                // Show a user-friendly error instead of the generic no-results block
+                const isTimeout = error.message === 'Search timed out';
+                els.noResults.style.display = 'none';
+                els.resultsContent.style.display = 'block';
+                els.resultsGrid.innerHTML = `
+                    <div style="text-align:center;padding:3rem 2rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <h3 style="color:#334155;font-size:1.25rem;margin-bottom:0.5rem;">${isTimeout ? 'Search Timed Out' : 'Something Went Wrong'}</h3>
+                        <p style="color:#64748b;margin-bottom:1.5rem;">${isTimeout ? 'The search took too long to respond. Please try again.' : 'We couldn\'t complete your search right now. Please try again.'}</p>
+                        <button onclick="document.querySelector('.search-form').dispatchEvent(new Event('submit'))" class="btn btn-cta" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                            Try Again
+                        </button>
+                    </div>
+                `;
             } finally {
                 // Always reset button state
                 els.btnSearch.classList.remove('loading');
