@@ -41,6 +41,8 @@ Deno.serve(async (req: Request) => {
       blFee,
       grandTotal,
       readyDate,
+      validFrom,
+      validTo,
     } = body;
 
         // Validate required fields
@@ -85,6 +87,11 @@ Deno.serve(async (req: Request) => {
                 }
             );
         }
+
+        // Build the validity period row if present
+        const validityRow = (validFrom && validTo)
+            ? `<tr><td style="padding:10px 16px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6;">Validity Period</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#1f2937;border-bottom:1px solid #f3f4f6;text-align:right;">${validFrom} – ${validTo}</td></tr>`
+            : "";
 
         // Build the commodity row if present
         const commodityRow = commodity
@@ -139,6 +146,7 @@ Deno.serve(async (req: Request) => {
   <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:24px;">
     <tr><td style="padding:10px 16px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6;">Container</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#1f2937;border-bottom:1px solid #f3f4f6;text-align:right;">${container}</td></tr>
     <tr><td style="padding:10px 16px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6;">Quantity</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#1f2937;border-bottom:1px solid #f3f4f6;text-align:right;">${quantity}</td></tr>
+    ${validityRow}
     ${commodityRow}
     ${readyDate ? `<tr><td style="padding:10px 16px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6;">Cargo Ready Date</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#1f2937;border-bottom:1px solid #f3f4f6;text-align:right;">${readyDate}</td></tr>` : ''}
     <tr><td style="padding:10px 16px;color:#6b7280;font-size:14px;border-bottom:1px solid #f3f4f6;">Rate / Container</td><td style="padding:10px 16px;font-size:14px;font-weight:600;color:#1f2937;border-bottom:1px solid #f3f4f6;text-align:right;">$${parseFloat(ratePerContainer).toFixed(2)} USD</td></tr>
@@ -189,7 +197,7 @@ Deno.serve(async (req: Request) => {
                     sender: "Grace Logistics <noreply@gracelogisticslk.com>",
                     subject: `[Copy] ${emailSubject}`,
                     html_body: emailHtml,
-                    text_body: `New Booking Request\n\nRoute: ${origin} → ${destination}\nContainer: ${container}\nQuantity: ${quantity}\n${commodity ? `Commodity: ${commodity}\n` : ""}${readyDate ? `Cargo Ready Date: ${readyDate}\n` : ""}Rate/Container: $${ratePerContainer} USD\nFreight Total: $${freightTotal} USD\n${blFeeVal > 0 ? `Delivery Order Fee: $${blFeeVal.toFixed(2)} USD\n` : ""}Grand Total: $${grandTotal} USD\n\nRates Portal: ${websiteRatesUrl}\n\nCustomer: ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone || "N/A"}\nNotes: ${customerNotes || "None"}`,
+                    text_body: `New Booking Request\n\nRoute: ${origin} → ${destination}\nContainer: ${container}\nQuantity: ${quantity}\n${(validFrom && validTo) ? `Validity Period: ${validFrom} – ${validTo}\n` : ""}${commodity ? `Commodity: ${commodity}\n` : ""}${readyDate ? `Cargo Ready Date: ${readyDate}\n` : ""}Rate/Container: $${ratePerContainer} USD\nFreight Total: $${freightTotal} USD\n${blFeeVal > 0 ? `Delivery Order Fee: $${blFeeVal.toFixed(2)} USD\n` : ""}Grand Total: $${grandTotal} USD\n\nRates Portal: ${websiteRatesUrl}\n\nCustomer: ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone || "N/A"}\nNotes: ${customerNotes || "None"}`,
                 }),
             }
         );
@@ -206,7 +214,7 @@ Deno.serve(async (req: Request) => {
                     sender: "Grace Logistics <noreply@gracelogisticslk.com>",
                     subject: emailSubject,
                     html_body: emailHtml,
-                    text_body: `New Booking Request\n\nRoute: ${origin} → ${destination}\nContainer: ${container}\nQuantity: ${quantity}\n${commodity ? `Commodity: ${commodity}\n` : ""}${readyDate ? `Cargo Ready Date: ${readyDate}\n` : ""}Rate/Container: $${ratePerContainer} USD\nFreight Total: $${freightTotal} USD\n${blFeeVal > 0 ? `Delivery Order Fee: $${blFeeVal.toFixed(2)} USD\n` : ""}Grand Total: $${grandTotal} USD\n\nRates Portal: ${websiteRatesUrl}\n\nCustomer: ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone || "N/A"}\nNotes: ${customerNotes || "None"}`,
+                    text_body: `New Booking Request\n\nRoute: ${origin} → ${destination}\nContainer: ${container}\nQuantity: ${quantity}\n${(validFrom && validTo) ? `Validity Period: ${validFrom} – ${validTo}\n` : ""}${commodity ? `Commodity: ${commodity}\n` : ""}${readyDate ? `Cargo Ready Date: ${readyDate}\n` : ""}Rate/Container: $${ratePerContainer} USD\nFreight Total: $${freightTotal} USD\n${blFeeVal > 0 ? `Delivery Order Fee: $${blFeeVal.toFixed(2)} USD\n` : ""}Grand Total: $${grandTotal} USD\n\nRates Portal: ${websiteRatesUrl}\n\nCustomer: ${customerName}\nEmail: ${customerEmail}\nPhone: ${customerPhone || "N/A"}\nNotes: ${customerNotes || "None"}`,
                 }),
             }
         );
