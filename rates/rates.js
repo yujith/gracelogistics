@@ -217,6 +217,9 @@
         }
         console.log('[GL] Data preload done, portsCache length:', portsCache.length);
 
+        // Refresh tier badge now that TIER_LABELS is populated
+        if (currentProfile) updateAuthUI();
+
         // Bind events — MUST run regardless of any earlier failures
         console.log('[GL] Calling bindEvents()');
         bindEvents();
